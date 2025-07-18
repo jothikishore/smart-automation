@@ -1,26 +1,26 @@
-name: ESP-IDF Build
+name: ESP32 OTA CI Build
 
 on:
   push:
-    paths:
-      - 'simple_ota_example/**'
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up ESP-IDF
-        uses: espressif/setup-esp-idf@v2
+        uses: espressif/setup-esp-idf@v1
         with:
-          version: latest
+          esp-idf-version: v5.1.2  # Use latest supported version
 
-      - name: Build Project
+      - name: Build ESP32 project
+        working-directory: simple_ota_example
         run: |
-          cd simple_ota_example
           idf.py fullclean
           idf.py build
