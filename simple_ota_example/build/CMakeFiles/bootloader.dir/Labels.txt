@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/Espressif/simple_ota_example/build/CMakeFiles/bootloader
+D:/Espressif/simple_ota_example/build/CMakeFiles/bootloader.rule
+D:/Espressif/simple_ota_example/build/CMakeFiles/bootloader-complete.rule
+D:/Espressif/simple_ota_example/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Espressif/simple_ota_example/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/Espressif/simple_ota_example/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/Espressif/simple_ota_example/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/Espressif/simple_ota_example/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/Espressif/simple_ota_example/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/Espressif/simple_ota_example/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
