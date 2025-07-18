@@ -12,25 +12,25 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
     - name: Set up ESP-IDF
-      uses: espressif/setup-idf@v1
+      uses: espressif/setup-esp-idf@v1
       with:
-        version: v5.3.1
+        esp-idf-version: v5.3.1  # or whichever version you're using
 
-    - name: Build firmware
+    - name: Run idf.py build
       run: |
         idf.py set-target esp32s3
         idf.py build
 
-    - name: Upload Firmware Artifacts
-      uses: actions/upload-artifact@v3
+    - name: Upload firmware artifacts
+      uses: actions/upload-artifact@v4
       with:
         name: esp32-firmware
         path: |
