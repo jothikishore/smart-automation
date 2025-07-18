@@ -1,22 +1,22 @@
-name: ESP32 OTA Build
+name: Build ESP32
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
     - name: Set up ESP-IDF
-      uses: golioth/setup-idf@v1  
+      uses: espressif/setup-esp-idf@v1
       with:
-        esp-idf-version: v5.3.1
+        version: v5.1
 
-    - name: Build firmware
+    - name: Build the project
       run: idf.py build
