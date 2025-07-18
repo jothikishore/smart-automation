@@ -1,7 +1,9 @@
-name: Build ESP32 Firmware
+name: ESP32 CI
 
 on:
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 jobs:
@@ -9,15 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v3
 
-      - name: Setup ESP-IDF
-        uses: espressif/setup-esp-idf@v1.4.0
-        with:
-          version: v5.3
+    - name: Setup ESP-IDF
+      uses: espressif/setup-esp-idf@v1
+      with:
+        version: v5.1
 
-      - name: Build firmware
-        run: |
-          idf.py set-target esp32s3
-          idf.py build
+    - name: Build
+      run: |
+        idf.py set-target esp32s3
+        idf.py build
