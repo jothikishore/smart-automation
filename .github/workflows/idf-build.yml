@@ -1,4 +1,4 @@
-name: ESP32-S3 CI Build
+name: ESP32-S3 CI Build (Docker)
 
 on:
   push:
@@ -9,31 +9,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: espressif/idf:latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-
-    - name: Set up ESP-IDF
-      uses: espressif/setup-idf@v1
-      with:
-        version: v5.3.1
-
-    - name: Build firmware
-      run: |
-        idf.py set-target esp32s3
-        idf.py build
-
-    - name: Upload firmware artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: esp32-firmware
-        path: |
-          build/*.bin
-          build/*.elf
-          build/*.map
+      - name: Build with ESP-IDF Docker
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.3.1
+          target: esp32s3
+          path: .
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32-firmware
+          path: |
+            build/bootloader/bootloader.bin
+            build/partition_table/partition-table.bin
+            build/*.bin
+            build/*.elf
