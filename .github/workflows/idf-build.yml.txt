@@ -1,0 +1,39 @@
+name: ESP32-S3 CI Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Set up ESP-IDF
+      uses: espressif/setup-idf@v1
+      with:
+        version: v5.3.1
+
+    - name: Build firmware
+      run: |
+        idf.py set-target esp32s3
+        idf.py build
+
+    - name: Upload Firmware Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: esp32-firmware
+        path: |
+          build/*.bin
+          build/*.elf
+          build/*.map
