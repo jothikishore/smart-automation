@@ -11,21 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up ESP-IDF
-        uses: espressif/setup-esp-idf@v1
+      - name: Build ESP32 project
+        uses: espressif/esp-idf-ci-action@v1
         with:
-          esp_idf_version: v5.3.1
+          target: esp32s3
+          path: simple_ota_example
 
-      - name: Build firmware
-        working-directory: simple_ota_example
-        run: |
-          idf.py set-target esp32s3
-          idf.py build
-
-      - name: Upload simple_ota.bin
+      - name: Upload OTA binary
         uses: actions/upload-artifact@v4
         with:
           name: simple_ota_bin
